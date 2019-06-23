@@ -1,0 +1,15 @@
+FROM java:oracle-jre-1.8.0_151-alpine-3.6.2
+
+EXPOSE 8080
+
+ENV NODE_ENV="production"
+
+
+LABEL APP_NAME=pf-pipeline
+
+
+ADD tools/docker/bin/nm-application.sh /nm-application.sh
+ENTRYPOINT	["/nm-application.sh"]
+
+ADD app/target/nm-batch-api-app.jar /nm-application.jar
+RUN chmod u+x /nm-application.sh
